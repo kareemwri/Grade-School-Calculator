@@ -1,0 +1,81 @@
+def calc(x,y,operator):
+    if operator==1:
+        print("{:,}".format(x*y))
+    elif operator==2:
+        if x%y==0:
+            print("{:,}".format(x/y))
+        elif x%y!=0:
+            remainder=x%y
+            x=x-remainder
+            ans=x/y
+            print("{:,}".format(ans),' R ',remainder)
+    elif operator==3:
+        print(x+y)
+    elif operator==4:
+        print(x-y)
+    elif operator==5: 
+        for n in range(1000):
+            if (x%2==0) and (y%2==0):
+                y=y/2
+                x=x/2
+                if n==0:
+                    if (x%2!=0) and (y%2!=0):
+                        print(' ',"{:,}".format(x),'\n','------\n',"{:,}".format(y))
+                        break
+            else:
+                print('Can not be reduced.\n',' ',"{:,}".format(x),'\n','------\n',"{:,}".format(y))
+                break
+    
+def fractions():
+    print('PLEASE ENTER FRACTION LIKE THIS ->  1/2   ')
+    a=input('Enter first fraction:\n')
+    b=input('Enter second fraction:\n')
+    sign=int(input('Enter 1 for addition and 2 for subtraction:\n'))
+
+    a=a.split('/')
+    b=b.split('/')
+    c=[]
+    d=[]
+    temp1=[]
+    temp2=[]
+    for item in a:
+        c.append(int(item))
+    for item in b:
+        d.append(int(item))
+    temp1.append(c[1]*d[0])
+    temp1.append(c[1]*d[1])
+    temp2.append(d[1]*c[0])
+    temp2.append(d[1]*c[1])
+    if sign==1:    
+        numerator=temp1[0]+temp2[0]
+        denominator=temp1[1]
+        print(' ',numerator,'\n','------\n',denominator)
+        reduce=input('Do you want to reduce the fraction?\n')
+        if reduce=='yes':
+            calc(numerator,denominator,5)
+        else:
+            print('')
+    if sign==2:
+        numerator=temp1[0]-temp2[0]
+        if numerator==0:
+            print('The answer is ZERO!!!')
+        elif numerator !=0:
+            denominator=temp1[1]
+            print(' ',numerator,'\n','------\n',denominator)
+            reduce=input('Do you want to reduce the fraction?\n')
+            if reduce=='yes':
+                calc(numerator,denominator,5)
+            else:
+                print('')
+            
+def start_calc():
+    operator=int(input('Choose your operator:\n'))
+    if operator>5:
+        fractions()
+    else:
+        first_Number=int(input('Enter first number\n'))
+        second_Number=int(input('Enter second number\n'))
+        calc(first_Number,second_Number,operator)
+        
+        
+        
