@@ -1,31 +1,26 @@
-def calc(x,y,operator):
-    if operator==1:
-        print("{:,}".format(x*y))
-    elif operator==2:
-        if x%y==0:
-            print("{:,}".format(x/y))
-        elif x%y!=0:
-            remainder=x%y
-            x=x-remainder
-            ans=x/y
-            print("{:,}".format(ans),' R ',remainder)
-    elif operator==3:
-        print(x+y)
-    elif operator==4:
-        print(x-y)
-    elif operator==5: 
-        for n in range(1000):
-            if (x%2==0) and (y%2==0):
-                y=y/2
-                x=x/2
-                if n==0:
-                    if (x%2!=0) and (y%2!=0):
-                        print(' ',"{:,}".format(x),'\n','------\n',"{:,}".format(y))
-                        break
+def reduce():
+    print('PLEASE ENTER FRACTION LIKE THIS ->  1/2   ')
+    a=input('Enter fraction:\n')
+    a=a.split('/')
+    numerator=int(a[0])
+    denominator=int(a[1])
+    num=[]
+    den=[]
+
+    for n in range(2,11):
+        check=0
+        while check == 0:
+            if (denominator%n==0) and (numerator%n==0):
+                denominator=denominator/n
+                numerator=numerator/n
+                num.append(numerator)
+                den.append(denominator)
             else:
-                print('Can not be reduced.\n',' ',"{:,}".format(x),'\n','------\n',"{:,}".format(y))
-                break
-    
+                check=1
+    print(' ',num[-1],'\n','------\n',den[-1])
+
+
+
 def fractions():
     print('PLEASE ENTER FRACTION LIKE THIS ->  1/2   ')
     a=input('Enter first fraction:\n')
@@ -50,32 +45,68 @@ def fractions():
         numerator=temp1[0]+temp2[0]
         denominator=temp1[1]
         print(' ',numerator,'\n','------\n',denominator)
-        reduce=input('Do you want to reduce the fraction?\n')
-        if reduce=='yes':
-            calc(numerator,denominator,5)
+        re=input('Do you want to reduce the fraction?\n')
+        if re=='yes':
+            reduce()
         else:
             print('')
     if sign==2:
-        numerator=temp1[0]-temp2[0]
+        numerator=temp2[0]-temp1[0]
         if numerator==0:
             print('The answer is ZERO!!!')
         elif numerator !=0:
             denominator=temp1[1]
             print(' ',numerator,'\n','------\n',denominator)
-            reduce=input('Do you want to reduce the fraction?\n')
-            if reduce=='yes':
-                calc(numerator,denominator,5)
+            re=input('Do you want to reduce the fraction?\n')
+            if re=='yes':
+                reduce()
             else:
                 print('')
+
+
+def calc(x,y,operator):
+    if operator==1:
+        print("{:,}".format(x*y))
+    elif operator==2:
+        if x%y==0:
+            print("{:,}".format(x/y))
+        elif x%y!=0:
+            remainder=x%y
+            x=x-remainder
+            ans=x/y
+            print("{:,}".format(ans),' R ',remainder)
+    elif operator==3:
+        print(x+y)
+    elif operator==4:
+        print(x-y)
+    elif operator==5:
+            reduce()
+    elif operator==6:
+        fractions()
+    
             
 def start_calc():
     operator=int(input('Choose your operator:\n'))
-    if operator>5:
+    if operator==5:
+        reduce()
+    elif operator==6:
         fractions()
     else:
         first_Number=int(input('Enter first number\n'))
         second_Number=int(input('Enter second number\n'))
         calc(first_Number,second_Number,operator)
-        
-        
-        
+
+
+
+<h3>FOR MULTIPLICATION ENTER 1<br><br>
+FOR DIVISION ENTER 2<br><br>
+FOR ADDITION ENTER 3<br><br>
+FOR SUBTRACTION ENTER 4<br><br>
+FOR REDUCTION ENTER 5<br><br>
+FOR FRACTIONS ENTER 6</h3>
+<h4><li>ENTER FRACTIONS USING THIS FORMAT -> 1/2 OR 2/4 </li></h4>
+
+
+
+
+start_calc()
